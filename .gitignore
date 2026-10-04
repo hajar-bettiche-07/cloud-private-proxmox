@@ -1,0 +1,15 @@
+# Clés privées et certificats
+id_*
+!id_*.pub
+*.pem
+*.key
+
+# Sauvegardes et fichiers temporaires
+*.bak
+*.swp
+*~
+
+# Secrets et variables d'environnement
+.env
+*.secret
+secrets/
