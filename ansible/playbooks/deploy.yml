@@ -1,0 +1,20 @@
+- name: Déploiement du service web
+  hosts: all
+  become: true
+  tasks:
+    - name: Créer le dossier de l'application
+      ansible.builtin.file:
+        path: /opt/web
+        state: directory
+        mode: "0755"
+
+    - name: Copier le fichier Compose
+      ansible.builtin.copy:
+        src: ../../docker/docker-compose.yml
+        dest: /opt/web/docker-compose.yml
+        mode: "0644"
+
+    - name: Lancer le service
+      ansible.builtin.command:
+        cmd: docker-compose up -d
+        chdir: /opt/web

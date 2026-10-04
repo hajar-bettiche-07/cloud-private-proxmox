@@ -1,0 +1,23 @@
+- name: Installation de Docker
+  hosts: all
+  become: true
+  tasks:
+    - name: Installer Docker et Compose
+      ansible.builtin.apt:
+        name:
+          - docker.io
+          - docker-compose
+        state: present
+        update_cache: true
+
+    - name: Démarrer Docker et l'activer au boot
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Ajouter admin au groupe docker
+      ansible.builtin.user:
+        name: admin
+        groups: docker
+        append: true
